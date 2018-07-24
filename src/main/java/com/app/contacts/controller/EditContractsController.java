@@ -1,5 +1,7 @@
 package com.app.contacts.controller;
 
+import java.util.Optional;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,11 +12,11 @@ import com.app.contacts.repository.ContactsRepository;
 
 @RestController
 @RequestMapping("/api")
-public class AddContractController {
+public class EditContractsController {
 
 	private final ContactsRepository contactsRepository;
 
-	public AddContractController(ContactsRepository contactsRepository) {
+	public EditContractsController(ContactsRepository contactsRepository) {
 		this.contactsRepository = contactsRepository;
 	}
 
@@ -32,6 +34,13 @@ public class AddContractController {
 		contact.setPhone(phone);
 
 		contactsRepository.save(contact);
+		return "success";
+	}
+
+	@GetMapping("/deletecontact")
+	public String addContact(@RequestParam(name="id") long id) {
+		Optional<Contact> contract = contactsRepository.findById(id);
+		contract.ifPresent(contactsRepository::delete);
 		return "success";
 	}
 }

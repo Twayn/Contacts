@@ -1,5 +1,9 @@
 <div class="starter-template">
     {{#contacts}}
-    <h2> Name: {{firstName}}; Last name: {{lastName}}; Age: {{age}}; Phone: {{phone}}. </h2>
+    <h2> Name: {{firstName}}; Last name: {{lastName}}; Age: {{age}}; Phone: {{phone}}.
+        <input type="button" onclick="location.href='/modification?operType=add&id={{id}}'" value="Add" >
+        <input type="button" onclick="location.href='/modification?operType=edit&id={{id}}'" value="Edit" >
+        <input type="button" onclick="location.href='/modification?operType=delete&id={{id}}'" value="Delete" >
+    </h2>
     {{/contacts}}
 </div>
