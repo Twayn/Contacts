@@ -11,6 +11,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "contact")
 public class Contact {
+
+	public Contact() {
+		setFirstName("Name");
+		setLastName("Last name");
+		setAge(0);
+		setPhone("0");
+	}
+
+	public void update(Contact source){
+		this.firstName = source.firstName;
+		this.lastName = source.lastName;
+		this.age = source.age;
+		this.phone = source.phone;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
 	@SequenceGenerator(
@@ -70,5 +85,16 @@ public class Contact {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	@Override
+	public String toString() {
+		return "Contact{" +
+				"id=" + id +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", age=" + age +
+				", phone='" + phone + '\'' +
+				'}';
 	}
 }

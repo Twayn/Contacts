@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Registration</title>
+</head>
 <body>
-<h1>Requested operation: {{operName}}</h1>
-<h1>Id: {{id}}</h1>
+
+<div align="center">
+    <form action="modification/?operType={{operName}}&id={{id}}" method="post" class="contact">
+        <table border="0">
+            <tr>
+                <td colspan="2" align="center"><h2>Action: {{operName}}. Id:{{id}}</h2></td>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td><input type="text" name="firstName" id="firstName" value="{{contact.firstName}}" required></td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td><input type="text" name="lastName" id="lastName" value="{{contact.lastName}}" required></td>
+            </tr>
+
+            <tr>
+                <td>Age:</td>
+                <td><input type="text" name="age" id="age" value="{{contact.age}}" required></td>
+            </tr>
+            <tr>
+                <td>Phone:</td>
+                <td><input type="text" name="phone" id="phone" value="{{contact.phone}}" required></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="OK"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
 
 </body>
-
 </html>
