@@ -1,11 +1,6 @@
 package com.app.contacts.controller;
 
-import static com.app.contacts.utils.OperType.ADD;
-import static com.app.contacts.utils.OperType.DELETE;
-import static com.app.contacts.utils.OperType.EDIT;
-
 import java.io.IOException;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,8 +16,10 @@ import com.app.contacts.repository.ContactsRepository;
 
 @Controller
 public class ModificationController {
-
 	private final ContactsRepository contactsRepository;
+	private final static String ADD = "add";
+	private final static String EDIT = "edit";
+	private final static String DELETE = "delete";
 
 	public ModificationController(ContactsRepository contactsRepository) {
 		this.contactsRepository = contactsRepository;
@@ -33,22 +30,25 @@ public class ModificationController {
 									 @RequestParam(name="id") long id,
 									 HttpServletResponse httpServletResponse) throws IOException {
 
-		Optional<Contact> contact;
 		ModelAndView modelAndView = new ModelAndView("modification");
 		modelAndView.addObject("operName", operType);
 		modelAndView.addObject("id", id);
 
-		if (operType.equals(ADD.getType())){
-			modelAndView.addObject("contact", new Contact());
-		} else if (operType.equals(EDIT.getType())){
-			contact = contactsRepository.findById(id);
-			contact.ifPresent(contact1 -> modelAndView.addObject("contact", contact1));
-		} else if (operType.equals(DELETE.getType())){
-			Optional<Contact> byId = contactsRepository.findById(id);
-			byId.ifPresent(contactsRepository::delete);
-			httpServletResponse.sendRedirect("/");
-			return null;
-		} else throw new RuntimeException("unexpected oper type: " + operType);
+		switch (operType) {
+			case ADD:
+				modelAndView.addObject("contact", new Contact());
+				break;
+			case EDIT:
+				contactsRepository.findById(id).ifPresent(
+						contact -> modelAndView.addObject("contact", contact));
+				break;
+			case DELETE:
+				contactsRepository.findById(id).ifPresent(contactsRepository::delete);
+				httpServletResponse.sendRedirect("/");
+				return null;
+			default:
+				throw new RuntimeException("Unexpected oper type: " + operType);
+		}
 
 		return modelAndView;
 	}
@@ -58,16 +58,19 @@ public class ModificationController {
 								 @RequestParam(name="operType") String operType,
 								 @RequestParam(name="id") long id,
 								 HttpServletResponse httpServletResponse) throws IOException {
-
-		contact.setId(0L);//TODO why?
-
-		if(operType.equals(ADD.getType())){
-			contactsRepository.save(contact);
-		} else if (operType.equals(EDIT.getType())){
-			Optional<Contact> byId = contactsRepository.findById(id);
-			byId.ifPresent(contact1 -> {
-				contact1.update(contact);
-				contactsRepository.save(contact1);});
+		switch (operType) {
+			case ADD:
+				contactsRepository.save(new Contact().update(contact));
+				break;
+			case EDIT:
+				contactsRepository.findById(id).ifPresent(
+						toEdit -> {
+							toEdit.update(contact);
+							contactsRepository.save(toEdit);
+						});
+				break;
+			default:
+				throw new RuntimeException("Unexpected oper type: " + operType);
 		}
 
 		httpServletResponse.sendRedirect("/");

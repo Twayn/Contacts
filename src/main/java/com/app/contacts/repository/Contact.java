@@ -13,17 +13,18 @@ import javax.persistence.Table;
 public class Contact {
 
 	public Contact() {
-		setFirstName("Name");
+		setFirstName("First Name");
 		setLastName("Last name");
 		setAge(0);
 		setPhone("0");
 	}
 
-	public void update(Contact source){
+	public Contact update(Contact source){
 		this.firstName = source.firstName;
 		this.lastName = source.lastName;
 		this.age = source.age;
 		this.phone = source.phone;
+		return this;
 	}
 
 	@Id
@@ -67,24 +68,29 @@ public class Contact {
 		return phone;
 	}
 
-	public void setId(Long id) {
+	public Contact setId(Long id) {
 		this.id = id;
+		return this;
 	}
 
-	public void setFirstName(String firstName) {
+	public Contact setFirstName(String firstName) {
 		this.firstName = firstName;
+		return this;
 	}
 
-	public void setLastName(String lastName) {
+	public Contact setLastName(String lastName) {
 		this.lastName = lastName;
+		return this;
 	}
 
-	public void setAge(int age) {
+	public Contact setAge(int age) {
 		this.age = age;
+		return this;
 	}
 
-	public void setPhone(String phone) {
+	public Contact setPhone(String phone) {
 		this.phone = phone;
+		return this;
 	}
 
 	@Override

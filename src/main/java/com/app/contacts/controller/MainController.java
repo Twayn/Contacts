@@ -1,7 +1,6 @@
 package com.app.contacts.controller;
 
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.StreamSupport.stream;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,15 +23,11 @@ public class MainController extends VisitCounter {
 	public ModelAndView index() {
 		increment();
 
- 		var model = new ModelAndView("index");
+		var contacts = new ArrayList<>();
+		contactsRepository.findAll().forEach(contacts::add);
 
-//		var contacts = new ArrayList<>();
-//		contactsRepository.findAll().iterator().forEachRemaining(contacts::add);
-
-		model.addObject("contacts",
-						stream(contactsRepository.findAll().spliterator(), false).collect(toList()));
-
+		var model = new ModelAndView("index");
+		model.addObject("contacts", contacts);
 		return model;
 	}
 }
-

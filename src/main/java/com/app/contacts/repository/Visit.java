@@ -12,6 +12,10 @@ import javax.persistence.Table;
 @Table(name = "visit")
 public class Visit {
 
+	public Visit(String description){
+		this.description = description;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seqa")
 	@SequenceGenerator(

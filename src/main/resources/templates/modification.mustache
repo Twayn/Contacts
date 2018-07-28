@@ -8,35 +8,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
 <body>
+    <div class="container">
+        <h2>Contact modification</h2>
+        <p>Action: {{operName}}. Id:{{id}}</p>
+        <form action="modification/?operType={{operName}}&id={{id}}" method="post" class="contact">
+            <div class="form-group">
+                <label for="firstName">First name:</label>
+                <input type="text" class="form-control" name="firstName" id="firstName" value="{{contact.firstName}}" required>
+            </div>
 
-<div class="container">
-    <h2>Contact modification</h2>
-    <p>Action: {{operName}}. Id:{{id}}</p>
-    <form action="modification/?operType={{operName}}&id={{id}}" method="post" class="contact">
-        <div class="form-group">
-            <label for="firstName">First name:</label>
-            <input type="text" class="form-control" name="firstName" id="firstName" value="{{contact.firstName}}" required>
-        </div>
+            <div class="form-group">
+                <label for="firstName">Last name:</label>
+                <input type="text" class="form-control" name="lastName" id="lastName" value="{{contact.lastName}}" required>
+            </div>
 
-        <div class="form-group">
-            <label for="firstName">Last name:</label>
-            <input type="text" class="form-control" name="lastName" id="lastName" value="{{contact.lastName}}" required>
-        </div>
+            <div class="form-group">
+                <label for="firstName">Age:</label>
+                <input type="text" class="form-control" name="age" id="age" value="{{contact.age}}" required>
+            </div>
 
-        <div class="form-group">
-            <label for="firstName">Age:</label>
-            <input type="text" class="form-control" name="age" id="age" value="{{contact.age}}" required>
-        </div>
+            <div class="form-group">
+                <label for="firstName">Phone:</label>
+                <input type="text" class="form-control" name="phone" id="phone" value="{{contact.phone}}" required>
+            </div>
 
-        <div class="form-group">
-            <label for="firstName">Phone:</label>
-            <input type="text" class="form-control" name="phone" id="phone" value="{{contact.phone}}" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary mb-2">OK</button>
-    </form>
-</div>
-
+            <button type="submit" class="btn btn-primary mb-2">OK</button>
+        </form>
+    </div>
 </body>
 </html>
