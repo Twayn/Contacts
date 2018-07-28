@@ -1,9 +1,29 @@
-<div class="starter-template">
-    {{#contacts}}
-    <h2> Name: {{firstName}}; Last name: {{lastName}}; Age: {{age}}; Phone: {{phone}}.
-        <input type="button" onclick="location.href='/modification?operType=add&id={{id}}'" value="Add" >
-        <input type="button" onclick="location.href='/modification?operType=edit&id={{id}}'" value="Edit" >
-        <input type="button" onclick="location.href='/modification?operType=delete&id={{id}}'" value="Delete" >
-    </h2>
-    {{/contacts}}
+<div class="container">
+    <h2>Contacts</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Age</th>
+            <th>Phone</th>
+            <th>Add</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#contacts}}
+        <tr>
+            <td>{{firstName}}</td>
+            <td>{{lastName}}</td>
+            <td>{{age}}</td>
+            <td>{{phone}}</td>
+            <td><button type="button" class="btn btn-primary" onclick="location.href='/modification?operType=add&id={{id}}'">Add</button></td>
+            <td><button type="button" class="btn btn-warning" onclick="location.href='/modification?operType=edit&id={{id}}'">Edit</button></td>
+            <td><button type="button" class="btn btn-danger" onclick="location.href='/modification?operType=delete&id={{id}}'">Delete</button></td>
+        </tr>
+        {{/contacts}}
+        </tbody>
+    </table>
 </div>
